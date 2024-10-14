@@ -63,12 +63,12 @@ const checkWinner = () =>{
 const resetGame = () =>{
     turn0 = true;
     enableBoxes();
-    boxes.innerText =" ";
+    // Looping through each box and clear its text
+    boxes.forEach((box) => {
+        box.innerText = " ";
+    });
     WinnerMsg.innerText = "";
-   
 }
-
-
 
 //logic
 boxes.forEach((box)=>{
