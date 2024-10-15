@@ -3,7 +3,7 @@ let resetBtn = document.querySelector(".reset");
 let WinnerMsg = document.querySelector(".message");
 
 let turn0 = true; 
-
+let count = 0; //Variable to track number of moves
 const winpatterns = [
     [0,1,2],
     [0,3,6],
@@ -52,18 +52,21 @@ const checkWinner = () =>{
             if(pos1Val === pos2Val && pos2Val===pos3Val){
                 console.log("winner",pos1Val)
                 showWinner(pos1Val);
+                return true; // returns true if there's a winner
             }
             
         }
     }
+    return false; // no winner found 
 }
 
 //reset game function
 
 const resetGame = () =>{
     turn0 = true;
+    count=0;  // reset the count when restarting
     enableBoxes();
-    boxes.innerText =" ";
+    //boxes.innerText =" ";
     WinnerMsg.innerText = "";
    
 }
@@ -83,8 +86,12 @@ else{
     turn0 = true;  
 }
 box.disabled = true;
-
-checkWinner();
+count++ ; // incrementing the counter
+// Checking for a winner, or if it's a draw
+if (!checkWinner() && count === 9) {
+    WinnerMsg.innerText = "It's a draw! 🤝";
+    disableBoxes();  // disabled all boxes on a draw
+        }
    });
 });
 
